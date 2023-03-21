@@ -1,0 +1,38 @@
+package Service;
+
+import LoginUsuario.*;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class LoginService {
+
+    final LoginRepo loginRepo;
+
+    public LoginService(LoginRepo loginRepo) {
+        this.loginRepo = loginRepo;
+    }
+
+    @Transactional
+    public Object save(LoginModel loginModel) {
+        return UsuarioRepo.save(loginModel);
+    }
+
+    public boolean existBySenha(String senha_usuario) {
+        return loginRepo.existBySenha(senha_usuario);
+    }
+
+    public boolean existByEmail(String email_usuario) {
+        return loginRepo.existByEmail(email_usuario);
+    }
+
+    public List<Usuario> findAll() {
+        return loginRepo.findAll();
+    }
+
+    public Optional<Usuario> findById(Integer id) {
+        return loginRepo.findById(id);
+    }
+}
